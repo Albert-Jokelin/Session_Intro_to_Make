@@ -1,0 +1,21 @@
+# Demonstrates the use of ifeq function
+INCLUDE_PATH := ../include
+# For additional include paths:
+# INCLUDE_PATH += -I"PATH_TO_INCLUDE"
+
+SOURCE_PATH := ../src
+
+ifeq ($(TYPE), Phone)
+	CPPFLAGS:= -DPhone
+	TARGET := FOSSPhoneOS.o
+else
+	CPPFLAGS:= -DLaptop
+	TARGET := FOSSLaptopOS.o
+endif
+
+
+OS: $(SOURCE_PATH)/main.cpp $(INCLUDE_PATH)
+	g++ $(SOURCE_PATH)/main.cpp $(CPPFLAGS) $(INCLUDE_PATH:%=-I %) -o $(TARGET)
+clean:
+	rm -rf FOSS*
+	rm -rf *.o

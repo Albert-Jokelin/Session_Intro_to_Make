@@ -1,0 +1,15 @@
+# Demonstrates the use of variables and include substitutions
+INCLUDE_PATH := ../include
+# For additional include paths:
+# INCLUDE_PATH += -I"PATH_TO_INCLUDE"
+
+SOURCE_PATH := ../src
+
+CPPFLAGS:= -DPhone
+TARGET := FOSSPhoneOS.o
+
+OS: $(SOURCE_PATH)/main.cpp $(INCLUDE_PATH)
+	g++ $(SOURCE_PATH)/main.cpp $(CPPFLAGS) $(INCLUDE_PATH:%=-I %) -o $(TARGET)
+clean:
+	rm -rf FOSSPhone*
+	rm -rf *.o
